@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    background-color: #24252A;
+    font-family:"Montserrat",sans-serif;
+}
+
+body {
+    background-color: #24252A;
+}
+
+li, a, button ,h1{
+    font-family:"Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color:#edf0f1;
+    text-decoration: none;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    outline:none;
+    border-radius:50px;
+    cursor:pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover, button:focus{
+    background-color: rgba(0,136,169,0.8);
+    border-style: none;
+    outline:none;
+}
+
+.movies{
+    padding:15px 50px;
+    overflow: hidden;
+}
+
+.movies h1{
+    font-size: 25px;
+    text-align: center;
+    padding-bottom:15px;
+}
+
+.movies-list {
+    margin:10px 0px;
+}
+
+.movie-item {
+    background-color: rgba(0,136,169,1);
+    border-radius: 0px;
+    margin:0;
+    width:100%;
+    text-align:left;
+    padding:15px;
+    font-size:22px;
+    transition: 0.4s;
+}
+
+.movie-info {
+    padding: 10px;
+    background-color: #232324;
+    display:none;
+    /* overflow:hidden; */
+    max-height:0;
+    transition: max-height 0.2s ease-in-out;
+}
+
+.active {
+    display: flex;
+}
+
+.movie-image {
+    /* padding:10px; */
+    width:20%;
+    height:50vh;
+    background-color: darkgrey;
+    margin-bottom: 1rem;
+    border-color: white;
+    border-style: solid;
+    border-width: 5px;
+    /* width:100%; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-image i{
+    background-color: darkgrey;
+    color:white;
+    font-size: 75px;
+    border-radius: 50%;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.3rem;
+    padding:1.5rem;
+}
+
+.movie-image img{
+    width:100%;
+    height:auto;
+    padding-bottom: 20px;
+}
+
+.movie-details{
+    width:80%;
+}
+
+.movie-info h1,h2,p{
+    background-color:#232324;
+    color:white;
+    text-align:left;
+    padding:10px;
+    margin:0;
+}
+
+.movie-info h1{
+    font-size: 25px;
+}
+
+.movie-info p{
+    font-size: 18px;
+    padding:5px 5px 5px 10px;
+}
+
+.movie-item:after {
+    content: "+"; /* Unicode character for "plus" sign (+) */
+    font-size: 30px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+  }
+  
+.activeButton:after {
+    content: "-"; /* Unicode character for "minus" sign (-) */
+}
+
+.screens h1{
+    font-size: 25px;
+    text-align: center;
+    padding-bottom:15px;
+}
+
+.form{
+    display:none;
+    max-height:0;
+    transition: max-height 0.2s ease-in-out;
+}
+
+form {
+    padding:10px;
+    margin:10px 0;
+}
+
+form label{
+    color:white;
+    width:20%;
+}
+
+form input{
+    width:60%;
+    border:none;
+    background-color: white;
+}
+
+form div{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form #submit {
+    margin-top:10px;
+    width:auto;
+    color:white;
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    outline:none;
+    border-radius:50px;
+    cursor:pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.screenList  {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screenList button{
+    margin:10px;
+}
+
+.row div{
+    display:flex;
+    vertical-align: middle;
+}
+
+.row div h1{
+    margin:0;
+    padding: 15px;
+}
+
+.table div, .table div h1{
+    background-color:white;
+}
+
+.days ,.days h1{
+    background-color: #0088a9 !important;
+}
+
+.table button{
+    width:100%;
+    border:none;
+    outline:none;
+    border-radius: 0;
+    margin:0;
+    padding:0;
+}
+
+.cell:hover {
+    background-color: lightblue;
+}
+
+.login {
+    padding:5rem;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+
+.login-form{
+    border-style: solid;
+    border-width:1px;
+    border-color:white;
+    padding:5rem;
+    border-radius: 10px;
+}
+
+.login label{
+    width:100%;
+    font-size:25px;
+}
+
+.login input{
+    width:100%;
+    padding:0.5rem;
+    margin-bottom: 1.5rem;
+    font-size:15px;
+    border-radius: 5px;
+    outline:none;
+    color:white;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.login-buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login-buttons button{
+    margin:1rem;
+    font-size:20px;
+}
+
+.login-buttons a{
+    margin:0;
+    padding:0;
+    font-size:20px;
+}
+
+.icon {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:5rem;
+    margin-bottom:1.5rem;
+}

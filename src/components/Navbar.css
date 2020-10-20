@@ -1,0 +1,33 @@
+header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:30px 10%;
+}
+
+header .logo{
+    font-size: 25px;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: #0088a9;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav-links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav-links li a:hover{
+    color:#0088a9;
+    text-decoration: none;
+}
