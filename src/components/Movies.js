@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useCallback, useState} from 'react';
 import MovieItem from './MovieItem';
 import './App.css';
 import './Navbar.css';
@@ -13,6 +13,8 @@ function Movies(){
     const [date,setDate] = useState("");
     const [dur,setDur] = useState("");
     const [des,setDes] = useState("");
+    const [del,setDel] = useState(false);
+    const [selects,setSelects] =useState([]);
 
     const expand = () => {
         display==="none"?setDisplay("block"):setDisplay("none");
@@ -46,6 +48,37 @@ function Movies(){
         }
     ]);
 
+    const deleteMovie = () => {
+        if (del===false) setDel(true);
+        else setDel(false);
+        if (del){
+
+        }
+    }
+
+    const select = useCallback(
+        movie=>{
+            var a = {
+                name:movie.name,
+                directors:movie.directors,
+                actors:movie.actors,
+                date:movie.date,
+                duration:movie.duration,
+                description:movie.description
+            };
+            if (selects.some(e => e.name===a.name)){ 
+                setSelects(selects.filter(e => e.name!==a.name));
+                // console.log("there");
+                // console.log(selects);
+            }
+            else {
+                setSelects([...selects,a]);
+                // console.log("Not there");
+                // console.log(selects);
+            }
+        },[selects,setSelects]
+    );
+
     const submit = (e) => {
         e.preventDefault()
         setMovies([
@@ -61,17 +94,33 @@ function Movies(){
         ]);
     }
 
+    const deletions = () => {
+        // console.log(selects);
+        setMovies(movies.filter(e=>{
+            for (var i=0;i<selects.length;i++){
+                if (selects[i].name===e.name){
+                    return false;
+                }
+            }
+            return true;
+        }));
+        setSelects([]);
+        setDel(false);
+        // console.log(movies);
+    }
+
     return (
         <div className="movies">
             <h1>Movies</h1>
             <div className="movies-list" id="movies-list">
                 {movies.map((movie,index)=>(
-                    <MovieItem key={index} movie={movie}/>
+                    <MovieItem key={index} movie={movie} option={del} select = {select}/>
                 ))}
             </div>
             <div style={{width:'100%',padding:'30px'}}>
-                <button style={{margin:'10px'}}>Delete</button>
+                <button onClick={deleteMovie} style={{margin:'10px'}}>Delete</button>
                 <button className="add" onClick={expand} style={{margin:'10px'}}>Add</button>
+                {del && <button onClick={deletions} style={{margin:'10px',float:'right'}}>Confirm Deletion</button>}
             </div>
             <div className="form" style={{display:display,maxHeight:height}}>
                 <form className="addForm" onSubmit={submit}>
