@@ -1,0 +1,3 @@
+[submodule "MMS-Back-End"]
+	path = MMS-Back-End
+	url = https://github.com/NFxFMKipper/MMS-Back-End.git

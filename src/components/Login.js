@@ -33,15 +33,22 @@ class Login extends Component {
         CustomerService.getCustomerByUsername(this.state.username).then((res) => {
             console.log('response => ' + JSON.stringify(res.data));
             this.setState({password_retrieved: res.data.password});
+            if(this.state.password_retrieved === this.state.password){
+                console.log('Same passwords')
+                this.props.history.push('/home');
+            }
+            else{
+                console.log('Different passwords')
+            }
         });
 
-        if(this.state.password_retrieved === this.state.password){
+        /* if(this.state.password_retrieved === this.state.password){
             console.log('Same passwords')
             this.props.history.push('/home');
         }
         else{
             console.log('Different passwords')
-        }
+        } */
     }
 
     render(){
