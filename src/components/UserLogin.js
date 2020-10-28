@@ -16,6 +16,7 @@ class Login extends Component {
         this.changeUsernameHandler = this.changeUsernameHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.logIn = this.logIn.bind(this);
+        this.back = this.back.bind(this);
     }
     
     changeUsernameHandler = (event) => {
@@ -27,7 +28,9 @@ class Login extends Component {
         this.setState({password: event.target.value});
     }
 
-    
+    back = (e) => {
+        this.props.history.push('/');
+    }
 
     logIn = (e) => {
         CustomerService.getCustomerByUsername(this.state.username).then((res) => {
@@ -65,12 +68,13 @@ class Login extends Component {
                     <input type="password" name="Password" id="password"
                     value={this.state.password} onChange={this.changePasswordHandler} /><br />
                     <div className="login-buttons">
-                        <Link to="">
-                            <button onClick={this.logIn} > SIGN IN </button>
-                        </Link>
+                        <button onClick={this.logIn} > SIGN IN </button>
                         <Link to="home">
                             <button>SIGN UP</button>
                         </Link>
+                    </div>
+                    <div className="login-buttons">
+                        <button class="btn-danger" onClick={this.back} > Back </button>
                     </div>
                 </div>
             </div>
