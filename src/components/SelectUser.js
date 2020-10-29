@@ -16,7 +16,7 @@ class SelectUser extends Component {
     }
 
     user = (e) => {
-        this.props.history.push('/userlogin');
+        this.props.history.push('/UserLogin');
     }
 
 

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import './App.css';
 import CustomerService from '../services/CustomerService';
 
-class Login extends Component {
+class UserLogin extends Component {
     constructor(props) {
         super(props)
         
@@ -16,6 +15,7 @@ class Login extends Component {
         this.changeUsernameHandler = this.changeUsernameHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.logIn = this.logIn.bind(this);
+        this.signUp = this.signUp.bind(this);
         this.back = this.back.bind(this);
     }
     
@@ -38,7 +38,7 @@ class Login extends Component {
             this.setState({password_retrieved: res.data.password});
             if(this.state.password_retrieved === this.state.password){
                 console.log('Same passwords')
-                this.props.history.push('/home');
+                this.props.history.push('/UserHome');
             }
             else{
                 console.log('Different passwords')
@@ -54,10 +54,17 @@ class Login extends Component {
         } */
     }
 
+    signUp = (e) => {
+        this.props.history.push('/UserSignUp');
+    }
+
+
+
     render(){
         return (
             <div className="login">
                 <div className="login-form">
+                    <h1 class="text-center"> User Login </h1>
                     <div className="icon">
                         <i className="fas fa-user-circle"></i>
                     </div>
@@ -69,9 +76,7 @@ class Login extends Component {
                     value={this.state.password} onChange={this.changePasswordHandler} /><br />
                     <div className="login-buttons">
                         <button onClick={this.logIn} > SIGN IN </button>
-                        <Link to="home">
-                            <button>SIGN UP</button>
-                        </Link>
+                        <button onClick={this.signUp}> SIGN UP </button>
                     </div>
                     <div className="login-buttons">
                         <button class="btn-danger" onClick={this.back} > Back </button>
@@ -82,4 +87,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default UserLogin;
