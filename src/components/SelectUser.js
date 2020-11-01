@@ -47,20 +47,9 @@ class SelectUser extends Component {
             </div>
             </div>
 
-             /* <div className="login">
-                    <div className="login-form">
-                        <div className="icon">
-                            <i className="fas fa-user-circle"></i>
-                            <i class="fas fa-ticket-alt"></i>
-                            <i class="fas fa-file-video"></i>
-                        </div>
-                        <div>
-                            <button type="button" class="btn btn-outline-dark"> User </button>
-                            <button type="button" class="btn btn-outline-dark"> Employee </button>
-                            <button type="button" class="btn btn-outline-dark"> Admin </button>
-                        </div>
-                    </div>
-                </div>  */
+             /* <i className="fas fa-user-circle"></i>
+                <i class="fas fa-ticket-alt"></i>
+                <i class="fas fa-file-video"></i>  */
         );
     }
 }
