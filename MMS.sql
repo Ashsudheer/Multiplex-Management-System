@@ -85,11 +85,14 @@ distributor VARCHAR(255) NOT NULL);
 
 CREATE TABLE Screen(
 screen_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-screen_no BIT NOT NULL,
+screen_no INT NOT NULL,
 multiplex_id INT NOT NULL,
 total_seats INT NOT NULL,
-no_of_seats INT NOT NULL,
+no_of_rows INT NOT NULL,
 FOREIGN KEY (multiplex_id) REFERENCES Multiplex(multiplex_id));
+
+select *
+from Screen_Shape;
 
 CREATE TABLE Class(
 class_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -100,11 +103,15 @@ CREATE TABLE ScreenShape(
 screenShape_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 screen_id INT NOT NULL,
 class_id INT NOT NULL,
-no_of_seats_left BIT NOT NULL,
-no_of_seats_middle BIT NOT NULL,
-no_of_seats_right BIT NOT NULL,
+no_of_seats_left INT NOT NULL,
+no_of_seats_middle INT NOT NULL,
+no_of_seats_right INT NOT NULL,
 FOREIGN KEY (screen_id) REFERENCES Screen(screen_id),
 FOREIGN KEY (class_id) REFERENCES class(class_id));
+
+Select *
+FROM SCREEN_SHAPe;
+
 
 CREATE TABLE Shows(
 show_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -160,6 +167,7 @@ PRIMARY KEY (show_id, booking_date, seat_no, screenShape_id));
 
 SHOW TABLES;
 
+
 SELECT *
 FROM Movie;
 
@@ -196,8 +204,6 @@ VALUES (1, 'aaaaaa@gmail.com'),
 (3, 'aaacb@gmail.com'),
 (3, 'aaacc@gmail.com');
 
-
-
 INSERT INTO Employees(emp_name, designation, salary, contact_id, address)
 VALUES ('Raj Varkey', 'Manager', 30000, 1, 'Shanti Vihar, Ashok Nagar');
 
@@ -217,3 +223,29 @@ VALUES ('Joker', 'Todd Phillips', 122, '2019-10-01',
  'In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.',
  LOAD_FILE('C:\Users\91918\OneDrive\Pictures\MMS_Movie_posters\1.jpg'),
  'Warner Bros. Pictures');
+
+#4+2*8+3*8+2*8
+INSERT INTO Screen(screen_no, multiplex_id, total_seats, no_of_rows)
+VALUES (1, 1, 60, 8);
+
+INSERT INTO Class(class_name, ticket_price)
+VALUES ('Lounge', 400),
+('Platinum', 280),
+('Gold', 240),
+('Silver', 200);
+
+INSERT INTO ScreenShape(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
+VALUES (1, 1, 2, 0, 2),
+(1, 2, 4, 0, 4),
+(1, 2, 4, 0, 4),
+(1, 3, 4, 0, 4),
+(1, 3, 4, 0, 4),
+(1, 3, 4, 0, 4),
+(1, 4, 4, 0, 4),
+(1, 4, 4, 0, 4);
+
+INSERT INTO Shows(screen_id, movie_id, start_time)
+VALUES (1, 1, 100000),
+(1, 1, 130000),
+(1, 1, 180000),
+(1, 1, 210000);
