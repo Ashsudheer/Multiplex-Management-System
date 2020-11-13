@@ -91,16 +91,13 @@ total_seats INT NOT NULL,
 no_of_rows INT NOT NULL,
 FOREIGN KEY (multiplex_id) REFERENCES Multiplex(multiplex_id));
 
-select *
-from Screen_Shape;
-
 CREATE TABLE Class(
 class_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 class_name VARCHAR(63) NOT NULL,
 ticket_price INT NOT NULL);
 
-CREATE TABLE ScreenShape(
-screenShape_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE ScreenRow(
+screenRow_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 screen_id INT NOT NULL,
 class_id INT NOT NULL,
 no_of_seats_left INT NOT NULL,
@@ -109,15 +106,20 @@ no_of_seats_right INT NOT NULL,
 FOREIGN KEY (screen_id) REFERENCES Screen(screen_id),
 FOREIGN KEY (class_id) REFERENCES class(class_id));
 
-Select *
-FROM SCREEN_SHAPe;
 
+Select *
+FROM Shows;
+
+TRUNCATE TABLE Shows;
+
+SELECT JSON_ARRAYAGG(JSON_OBJECT('rowId', screenRow_id, 'screenId', screen_id, 'classId', class_id, 'noLeft', no_of_seats_left, 'noMiddle', no_of_seats_middle, 'noRight', no_of_seats_right)) from ScreenRow;
 
 CREATE TABLE Shows(
 show_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 screen_id INT NOT NULL,
 movie_id INT NOT NULL,
 start_time TIME NOT NULL,
+show_day DATE NOT NULL,
 FOREIGN KEY (screen_id) REFERENCES Screen(screen_id),
 FOREIGN KEY (movie_id) REFERENCES Movie(movie_id));
 
@@ -134,10 +136,10 @@ FOREIGN KEY (show_id) REFERENCES Shows(show_id));
 
 CREATE TABLE seatNums(
 ticket_no BIGINT NOT NULL,
-screenShape_id INT NOT NULL,
+screenRow_id INT NOT NULL,
 seat_no BIT NOT NULL,
 FOREIGN KEY (ticket_no) REFERENCES Ticket(ticket_no),
-FOREIGN KEY (screenShape_id) REFERENCES ScreenShape(screenShape_id));
+FOREIGN KEY (screenRow_id) REFERENCES ScreenRow(screenRow_id));
 
 CREATE TABLE Customer(
 username VARCHAR(127) NOT NULL PRIMARY KEY,
@@ -166,6 +168,9 @@ screenShape_id INT NOT NULL,
 PRIMARY KEY (show_id, booking_date, seat_no, screenShape_id));
 
 SHOW TABLES;
+
+
+
 
 
 SELECT *
@@ -223,6 +228,20 @@ VALUES ('Joker', 'Todd Phillips', 122, '2019-10-01',
  'In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.',
  LOAD_FILE('C:\Users\91918\OneDrive\Pictures\MMS_Movie_posters\1.jpg'),
  'Warner Bros. Pictures');
+ 
+ INSERT INTO Movie (movie_name, director, duration, release_date, genre, language, subtitle, actors, synopsis, poster, distributor)
+VALUES ('Grave of the Fireflies', 'Isao Takahata', 94, '1988-04-16',
+'Animation, Drama, War', 'Japanese', 'English',
+ 'Tsutomu Tatsumi, Ayano Shiraishi, Akemi Yamaguchi',
+ 'A devastating meditation on the human cost of war, this animated tale follows Seita (Tsutomu Tatsumi), a teenager charged with the care of his younger sister, Setsuko (Ayano Shiraishi), after an American firebombing during World War II separates the two children from their parents.',
+ LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\2.jpg'),
+ 'Toho Co., Ltd.'),
+ ('Kumbalangi Nights', 'Madhu C. Narayanan', 136, '2019-02-07',
+'Comedy, Drama, Romance', 'Malayalam', 'English',
+ 'Shane Nigam, Soubin Shahir, Fahadh Faasil',
+ 'Saji, Bonny, Bobby and Franky are siblings who mostly do not get along. However, a series of events forces them to keep their animosity aside and support each other.',
+ LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\3.jpg'),
+ 'Century Films');
 
 #4+2*8+3*8+2*8
 INSERT INTO Screen(screen_no, multiplex_id, total_seats, no_of_rows)
@@ -234,7 +253,7 @@ VALUES ('Lounge', 400),
 ('Gold', 240),
 ('Silver', 200);
 
-INSERT INTO ScreenShape(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
+INSERT INTO ScreenRow(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
 VALUES (1, 1, 2, 0, 2),
 (1, 2, 4, 0, 4),
 (1, 2, 4, 0, 4),
@@ -244,8 +263,15 @@ VALUES (1, 1, 2, 0, 2),
 (1, 4, 4, 0, 4),
 (1, 4, 4, 0, 4);
 
-INSERT INTO Shows(screen_id, movie_id, start_time)
-VALUES (1, 1, 100000),
-(1, 1, 130000),
-(1, 1, 180000),
-(1, 1, 210000);
+INSERT INTO Shows(screen_id, movie_id, start_time, show_day)
+VALUES (1, 1, 100000, 20201125),
+(1, 1, 130000, 20201125),
+(1, 1, 180000, 20201125),
+(1, 1, 210000, 20201125),
+(1, 1, 100000, 20201126),
+(1, 1, 130000, 20201126),
+(1, 1, 180000, 20201126),
+(1, 1, 100000, 20201127),
+(1, 1, 130000, 20201127),
+(1, 1, 180000, 20201127),
+(1, 1, 210000, 20201127);
