@@ -77,8 +77,8 @@ button:hover, button:focus{
 
 .movie-image {
     /* padding:10px; */
-    width:20%;
-    height:50vh;
+    width:15%;
+    height:40vh;
     background-color: darkgrey;
     margin-bottom: 1rem;
     border-color: white;
@@ -103,8 +103,9 @@ button:hover, button:focus{
 
 .movie-image img{
     width:100%;
-    height:auto;
-    padding-bottom: 20px;
+    height:100%;
+    /* padding-bottom: 20px; */
+    object-fit:cover;
 }
 
 .movie-details{

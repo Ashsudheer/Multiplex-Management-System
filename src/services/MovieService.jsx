@@ -8,6 +8,10 @@ class MovieService {
         return axios.get(MOVIES_API_BASE_URL);
     }
 
+    addMovie(data){
+        return axios.post(MOVIES_API_BASE_URL,data);
+    }
+
 
 }
 
