@@ -6,7 +6,8 @@ class Booking extends Component {
         super(props)
         
         this.state = {
-            movieId: this.props.movieId
+            movieId: this.props.movieId,
+            showId: this.props.showId
         }
 
     }
@@ -14,7 +15,7 @@ class Booking extends Component {
     render(){
         return (
             <div>
-                <h2> Booking {this.state.movieId}</h2>
+                <h2> Booking {this.state.movieId} {this.state.showId}</h2>
             </div>
         );
     }

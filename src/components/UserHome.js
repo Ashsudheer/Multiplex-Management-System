@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import Movies1 from './Movies1';
 import Navbar1 from './Navbar1';
-import Shows from './Shows';
 
 class UserHome extends Component {
     constructor(props) {

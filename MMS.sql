@@ -162,6 +162,7 @@ screenShape_id INT NOT NULL,
 PRIMARY KEY (show_id, booking_date, seat_no, screenShape_id));
 
 
+
 /*
 INSERT INTO Multiplex
 VALUES (1, 'Ilox', 'qwer1234', 5, 20),
@@ -224,8 +225,10 @@ VALUES ('Grave of the Fireflies', 'Isao Takahata', 94, '1988-04-16',
  LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\3.jpg'),
  'Century Films');
 
-#4+2*8+3*8+2*8
+#4+2*8+3*8+2*8 = 60
+#12*7+4 = 88
 INSERT INTO Screen(screen_no, multiplex_id, total_seats, no_of_rows)
+VALUES (2, 1, 88, 8),
 VALUES (1, 1, 60, 8);
 
 INSERT INTO Class(class_name, ticket_price)
@@ -255,7 +258,13 @@ VALUES (1, 1, 100000, 20201125),
 (1, 1, 100000, 20201127),
 (1, 1, 130000, 20201127),
 (1, 1, 180000, 20201127),
-(1, 1, 210000, 20201127);
+(1, 1, 210000, 20201127),
+(2, 2, 100000, 20201125),
+(2, 2, 130000, 20201125),
+(2, 2, 100000, 20201126),
+(2, 2, 130000, 20201126),
+(2, 2, 100000, 20201127),
+(2, 2, 130000, 20201127);
 
 #INSERT INTO Employees(emp_name, designation, salary, contact_id, address)
 #VALUES ('Raj Varkey', 'Manager', 30000, 1, 'Shanti Vihar, Ashok Nagar');
