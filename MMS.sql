@@ -96,23 +96,17 @@ class_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 class_name VARCHAR(63) NOT NULL,
 ticket_price INT NOT NULL);
 
-CREATE TABLE ScreenRow(
-screenRow_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Shapes(
+row_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 screen_id INT NOT NULL,
 class_id INT NOT NULL,
 no_of_seats_left INT NOT NULL,
 no_of_seats_middle INT NOT NULL,
 no_of_seats_right INT NOT NULL,
 FOREIGN KEY (screen_id) REFERENCES Screen(screen_id),
-FOREIGN KEY (class_id) REFERENCES class(class_id));
+FOREIGN KEY (class_id) REFERENCES Class(class_id));
 
-
-Select *
-FROM Shows;
-
-TRUNCATE TABLE Shows;
-
-SELECT JSON_ARRAYAGG(JSON_OBJECT('rowId', screenRow_id, 'screenId', screen_id, 'classId', class_id, 'noLeft', no_of_seats_left, 'noMiddle', no_of_seats_middle, 'noRight', no_of_seats_right)) from ScreenRow;
+SELECT JSON_ARRAYAGG(JSON_OBJECT('rowId', row_id, 'screenId', screen_id, 'classId', class_id, 'noLeft', no_of_seats_left, 'noMiddle', no_of_seats_middle, 'noRight', no_of_seats_right)) from Shapes;
 
 CREATE TABLE Shows(
 show_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -136,10 +130,10 @@ FOREIGN KEY (show_id) REFERENCES Shows(show_id));
 
 CREATE TABLE seatNums(
 ticket_no BIGINT NOT NULL,
-screenRow_id INT NOT NULL,
+row_id INT NOT NULL,
 seat_no BIT NOT NULL,
 FOREIGN KEY (ticket_no) REFERENCES Ticket(ticket_no),
-FOREIGN KEY (screenRow_id) REFERENCES ScreenRow(screenRow_id));
+FOREIGN KEY (row_id) REFERENCES Shapes(row_id));
 
 CREATE TABLE Customer(
 username VARCHAR(127) NOT NULL PRIMARY KEY,
@@ -167,14 +161,6 @@ seat_no BIT NOT NULL,
 screenShape_id INT NOT NULL,
 PRIMARY KEY (show_id, booking_date, seat_no, screenShape_id));
 
-SHOW TABLES;
-
-
-
-
-
-SELECT *
-FROM Movie;
 
 /*
 INSERT INTO Multiplex
@@ -209,12 +195,7 @@ VALUES (1, 'aaaaaa@gmail.com'),
 (3, 'aaacb@gmail.com'),
 (3, 'aaacc@gmail.com');
 
-INSERT INTO Employees(emp_name, designation, salary, contact_id, address)
-VALUES ('Raj Varkey', 'Manager', 30000, 1, 'Shanti Vihar, Ashok Nagar');
 
-INSERT INTO Emp_Contact
-VALUES (1, 8888888880),
-(1, 8888888881);
 
 INSERT INTO Customer
 VALUES ('vava', 'qwerty123', 'Suresh', 'rajavemabala@gmail.com', '7777777770'),
@@ -226,7 +207,7 @@ VALUES ('Joker', 'Todd Phillips', 122, '2019-10-01',
 'Crime, Drama, Thriller ', 'English', 'English',
  'Joaquin Phoenix, Robert De Niro, Zazie Beetz',
  'In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.',
- LOAD_FILE('C:\Users\91918\OneDrive\Pictures\MMS_Movie_posters\1.jpg'),
+ LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\1.jpg'),
  'Warner Bros. Pictures');
  
  INSERT INTO Movie (movie_name, director, duration, release_date, genre, language, subtitle, actors, synopsis, poster, distributor)
@@ -253,7 +234,7 @@ VALUES ('Lounge', 400),
 ('Gold', 240),
 ('Silver', 200);
 
-INSERT INTO ScreenRow(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
+INSERT INTO Shapes(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
 VALUES (1, 1, 2, 0, 2),
 (1, 2, 4, 0, 4),
 (1, 2, 4, 0, 4),
@@ -275,3 +256,12 @@ VALUES (1, 1, 100000, 20201125),
 (1, 1, 130000, 20201127),
 (1, 1, 180000, 20201127),
 (1, 1, 210000, 20201127);
+
+#INSERT INTO Employees(emp_name, designation, salary, contact_id, address)
+#VALUES ('Raj Varkey', 'Manager', 30000, 1, 'Shanti Vihar, Ashok Nagar');
+
+#INSERT INTO Emp_Contact
+#VALUES (1, 8888888880),
+#(1, 8888888881);
+
+SELECT JSON_ARRAYAGG(JSON_OBJECT('rowId', row_id, 'screenId', screen_id, 'classId', class_id, 'noLeft', no_of_seats_left, 'noMiddle', no_of_seats_middle, 'noRight', no_of_seats_right)) from Shapes;
