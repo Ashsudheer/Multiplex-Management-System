@@ -2,6 +2,7 @@ import React,{useCallback, useState} from 'react';
 import MovieItem from './MovieItem';
 import './App.css';
 import './Navbar.css';
+import Movies1 from './Movies1';
 
 function Movies(){
 
@@ -112,6 +113,7 @@ function Movies(){
     return (
         <div className="movies">
             <h1>Movies</h1>
+            <Movies1 />
             <div className="movies-list" id="movies-list">
                 {movies.map((movie,index)=>(
                     <MovieItem key={index} movie={movie} option={del} select = {select}/>
