@@ -13,7 +13,7 @@ function Movies(){
     const [dir,setDir] = useState("");
     const [act,setAct] = useState("");
     const [date,setDate] = useState("");
-    const [dur,setDur] = useState("");
+    const [dur,setDur] = useState(0);
     const [des,setDes] = useState("");
     const [del,setDel] = useState(false);
     const [selects,setSelects] =useState([]);
@@ -21,63 +21,94 @@ function Movies(){
     const [lan,setLan]=useState('');
     const [sub,setSub]=useState('');
     const [img,setImg]=useState('');
+    const [dis,setDis]=useState('');
+    const [gen,setGen]=useState('');
+    const [isLoading,setLoading]=useState(true);
 
     const expand = () => {
         display==="none"?setDisplay("block"):setDisplay("none");
         display==="none"?setHeight("100%"):setHeight("0");
     }
 
-    useEffect(()=>{
+    
+
+    // useEffect(()=>{
+    //     const loadData = () => {
+    //         MovieService.getAllMovies().then((res) => {
+    //           console.log('data:',res.data);
+    //           for (var i = 0;i<res.data.length;i++){
+    //               var info=res.data[i];
+    //               console.log(movies);
+    //               setMovies([
+    //                   ...movies,
+    //                   {
+    //                       id:info.movieId,
+    //                       name:info.movieName,
+    //                       directors:info.director,
+    //                       actors:info.actor,
+    //                       date:info.releaseDate,
+    //                       duration:info.duration,
+    //                       description:info.synopsis,
+    //                       language:info.language,
+    //                       subtitles:info.subtitle,
+    //                       poster:info.poster
+    //                   }
+    //               ]);
+    //           }
+    //           console.log(movies);
+    //       })
+    //   }
+    //   loadData();
+    // },[]);
+
+    useEffect(() => {
+        // const fetchData = () => {
+           
+        // };
         MovieService.getAllMovies().then((res) => {
-            console.log('data:',res.data);
-            setImg(res.data[0]);
+            // console.log('data:',res.data);
+            var movielist=movies;
             for (var i = 0;i<res.data.length;i++){
                 var info=res.data[i];
-                setMovies([
-                    ...movies,
-                    {
-                        id:info.movieId,
-                        name:info.movieName,
-                        directors:info.director,
-                        actors:info.actor,
-                        date:info.releaseDate,
-                        duration:info.duration,
-                        description:info.synopsis,
-                        language:info.language,
-                        subtitles:info.subtitle,
-                        poster:info.poster
-                    }
-                ]);
+                // console.log(movies);
+                // setMovies([
+                //     ...movies,
+                //     {
+                //         id:info.movieId,
+                //         name:info.movieName,
+                //         directors:info.director,
+                //         actors:info.actor,
+                //         date:info.releaseDate,
+                //         duration:info.duration,
+                //         description:info.synopsis,
+                //         language:info.language,
+                //         subtitles:info.subtitle,
+                //         poster:info.poster
+                //     }
+                // ]);
+                let mov = {
+                    id:info.movieId,
+                    name:info.movieName,
+                    directors:info.director,
+                    actors:info.actor,
+                    date:info.releaseDate,
+                    duration:info.duration,
+                    description:info.synopsis,
+                    language:info.language,
+                    subtitles:info.subtitle,
+                    poster:info.poster
+                };
+                movielist.push(mov);
             }
+            console.log(movielist);
+            setMovies(movielist)
+            // console.log('movies',movies);
+            // console.log('movies5',movies[0]);
+            setLoading(false);
         })
-    },[]);
+        // fetchData();
+    }, []);
 
-    // const [movies,setMovies] = useState([
-    //     {
-    //         name: "Movie 1",
-    //         directors: "Lorem Ipsum...",
-    //         actors: "Lorem Ipsum...",
-    //         date: "Lorem Ipsum...",
-    //         duration: "Lorem Ipsum...",
-    //         description:"Lorem Ipsum..."
-    //     },
-    //     {
-    //         name: "Movie 2",
-    //         directors: "Lorem Ipsum...",
-    //         actors: "Lorem Ipsum...",
-    //         date: "Lorem Ipsum...",
-    //         duration: "Lorem Ipsum...",
-    //         description:"Lorem Ipsum..."
-    //     },
-    //     {
-    //         name: "Movie 3",
-    //         directors: "Lorem Ipsum...",
-    //         actors: "Lorem Ipsum...",
-    //         date: "Lorem Ipsum...",
-    //         duration: "Lorem Ipsum...",
-    //         description:"Lorem Ipsum..."
-    //     }
-    // ]);
 
     const deleteMovie = () => {
         if (del===false) setDel(true);
@@ -108,19 +139,20 @@ function Movies(){
     );
 
     const submit = (e) => {
-        e.preventDefault()
-        var item = {
+        e.preventDefault();
+
+        let item = {
             movieName:name,
             director:dir,
             actors:act,
             releaseDate:date,
-            duration:dur,
+            duration:parseInt(dur),
             synopsis:des,
             language:lan,
-            subtitles:sub,
+            subtitle:sub,
             poster:img,
-            distibutor:'',
-            genre:''
+            distributor:dis,
+            genre:gen
         }
         MovieService.addMovie(item).then((res) => {
             console.log('data:',res);
@@ -156,6 +188,11 @@ function Movies(){
         setDel(false);
         // console.log(movies);
     }
+
+    if (isLoading) {
+        return <div className="movies">Loading...</div>;
+    }
+    
 
     return (
         <div className="movies">
@@ -195,7 +232,7 @@ function Movies(){
                     </div>
                     <div>
                         <label htmlFor="Duration">Duration</label>
-                        <input type="text" id="dur" name="Duration" value={dur} onChange={e=>setDur(e.target.value)}/><br/>
+                        <input type="text" id="dur" name="Duration" onChange={e=>setDur(e.target.value)}/><br/>
                     </div>
                     <div>
                         <label htmlFor="Language">Language</label>
@@ -206,8 +243,16 @@ function Movies(){
                         <input type="text" id="sub" name="Subtitles" value={sub} onChange={e=>setSub(e.target.value)}/><br/>
                     </div>
                     <div>
-                        <label htmlFor="Language">Poster</label>
-                        <input type="text" id="lan" name="Language" value={img} onChange={e=>setImg(e.target.value)}/><br/>
+                        <label htmlFor="poster">Poster</label>
+                        <input type="text" id="img" name="Poster" value={img} onChange={e=>setImg(e.target.value)}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="dis">Distributor</label>
+                        <input type="text" id="dis" name="Distributor" value={dis} onChange={e=>setDis(e.target.value)}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="Genre">Genre</label>
+                        <input type="text" id="gen" name="Genre" value={gen} onChange={e=>setGen(e.target.value)}/><br/>
                     </div>
                     <input id="submit" type="submit" value="Submit"/>
                 </form>

@@ -9,7 +9,10 @@ class MovieService {
     }
 
     addMovie(data){
-        return axios.post(MOVIES_API_BASE_URL,data);
+        console.log(data);
+        return axios.post(MOVIES_API_BASE_URL,data).catch(error=>{
+            console.log(error.response);
+        });
     }
 
 

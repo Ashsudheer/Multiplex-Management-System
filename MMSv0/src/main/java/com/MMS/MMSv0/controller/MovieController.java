@@ -31,25 +31,16 @@ public class MovieController {
 	@Autowired
 	private MovieRepository MovieRepository;
 	
+	
+//	@PostMapping(path = "/movies", consumes = "application/x-www-form-urlencoded")
+	@PostMapping("/movies")
+	public Movie addMovie(@RequestBody Movie movie) {
+		return MovieRepository.save(movie);
+	}
 	//get all movies
 	@GetMapping("/movies")
 	public List<Movie> getAllMovies(){
 		return MovieRepository.findAll();
-	}
-	
-//	@PostMapping("/movies")
-//	public Movie addMovie(@RequestBody Movie movie) {
-//		return MovieRepository.save(movie);
-//	}
-	
-//	@PostMapping(path = "/movies", consumes = "application/json")
-//	public Movie addMovie(@RequestBody Movie movie) {
-//	  return movie;
-//	}
-
-	@PostMapping(path = "/movies", consumes = "application/x-www-form-urlencoded")
-	public Movie addMovie(Movie movie) {
-		return MovieRepository.save(movie);
 	}
 	
 	//get image
