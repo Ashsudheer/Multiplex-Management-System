@@ -51,7 +51,7 @@ public class Movie {
 	
 	@Lob
 	@Column(name = "poster")
-	private byte[] poster;
+	private String poster;
 	
 	/*
 	@OneToOne(mappedBy = "Movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -66,7 +66,7 @@ public class Movie {
 	}
 
 	public Movie(int movie_id, String movie_name, String director, int duration, Date release_date, String genre,
-			String language, String subtitle, String actors, String synopsis, String distributor, byte[] poster) {
+			String language, String subtitle, String actors, String synopsis, String distributor, String poster) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_name = movie_name;
@@ -171,11 +171,11 @@ public class Movie {
 		this.distributor = distributor;
 	}
 
-	public byte[] getPoster() {
+	public String getPoster() {
 		return poster;
 	}
 
-	public void setPoster(byte[] poster) {
+	public void setPoster(String poster) {
 		this.poster = poster;
 	}
 	
@@ -185,7 +185,7 @@ public class Movie {
 		return "Movie [movie_id=" + movie_id + ", movie_name=" + movie_name + ", director=" + director + ", duration="
 				+ duration + ", release_date=" + release_date + ", genre=" + genre + ", language=" + language
 				+ ", subtitle=" + subtitle + ", actors=" + actors + ", synopsis=" + synopsis + ", distributor="
-				+ distributor + ", poster=" + Arrays.toString(poster) + "]";
+				+ distributor + ", poster=" + poster + "]";
 	}
 	
 

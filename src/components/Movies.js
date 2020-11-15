@@ -206,8 +206,8 @@ function Movies(){
                         <input type="text" id="sub" name="Subtitles" value={sub} onChange={e=>setSub(e.target.value)}/><br/>
                     </div>
                     <div>
-                        <label htmlFor="Language">Language</label>
-                        <input type="text" id="lan" name="Language" value={lan} onChange={e=>setLan(e.target.value)}/><br/>
+                        <label htmlFor="Language">Poster</label>
+                        <input type="text" id="lan" name="Language" value={img} onChange={e=>setImg(e.target.value)}/><br/>
                     </div>
                     <input id="submit" type="submit" value="Submit"/>
                 </form>

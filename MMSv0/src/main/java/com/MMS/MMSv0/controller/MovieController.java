@@ -37,20 +37,30 @@ public class MovieController {
 		return MovieRepository.findAll();
 	}
 	
-	@PostMapping("/movies")
-	public Movie addMovie(@RequestBody Movie movie) {
+//	@PostMapping("/movies")
+//	public Movie addMovie(@RequestBody Movie movie) {
+//		return MovieRepository.save(movie);
+//	}
+	
+//	@PostMapping(path = "/movies", consumes = "application/json")
+//	public Movie addMovie(@RequestBody Movie movie) {
+//	  return movie;
+//	}
+
+	@PostMapping(path = "/movies", consumes = "application/x-www-form-urlencoded")
+	public Movie addMovie(Movie movie) {
 		return MovieRepository.save(movie);
 	}
 	
 	//get image
-	@GetMapping("/movies/{Id}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable int Id){
-        // Load file as Resource
-		Movie movie  = MovieRepository.findById(Id).orElseThrow(() -> new ResourceNotFoundException("Movie does not exist"));
-
-        return ResponseEntity.ok()
-            .contentType(MediaType.parseMediaType("image/jpeg"))
-            .header("attachment; filename=\"" + movie.getMovieName() + "\"")
-            .body(new ByteArrayResource(movie.getPoster()));
-    }
+//	@GetMapping("/movies/{Id}")
+//	public ResponseEntity<Resource> downloadFile(@PathVariable int Id){
+//        // Load file as Resource
+//		Movie movie  = MovieRepository.findById(Id).orElseThrow(() -> new ResourceNotFoundException("Movie does not exist"));
+//
+//        return ResponseEntity.ok()
+//            .contentType(MediaType.parseMediaType("image/jpeg"))
+//            .header("attachment; filename=\"" + movie.getMovieName() + "\"")
+//            .body(new ByteArrayResource(movie.getPoster()));
+//    }
 }

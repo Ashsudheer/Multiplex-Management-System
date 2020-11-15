@@ -10,11 +10,11 @@ function MovieItem({movie,option,select}){
     // var style={
     //     backgroundColor:'rgba(0,136,169,1)'
     // };
-    const blobToImage = (Id) => {
-        let poster_url = "http://localhost:8081/api/v1/movies/"+Id.toString();
-        console.log('Poster:',poster_url);
-        return poster_url;
-    }
+    // const blobToImage = (Id) => {
+    //     let poster_url = "http://localhost:8081/api/v1/movies/"+Id.toString();
+    //     console.log('Poster:',poster_url);
+    //     return poster_url;
+    // }
 
     const expandItem = () => {
         if (option){
@@ -49,7 +49,7 @@ function MovieItem({movie,option,select}){
             <button className={item} style={ del ? { backgroundColor: 'rgba(0,136,169,0.8)'} : {backgroundColor:'rgba(0,136,169,1)'}} onClick={expandItem}>{movie.name}</button>
             <div className={info} style={{display:display,maxHeight:height}}>
                 <div className="movie-image">
-                    <img src={blobToImage(movie.id)} alt=""></img>
+                    <img src={movie.poster} alt=""></img>
                     {/* <i className="fas fa-camera"></i> */}
                 </div>
                 <div className="movie-details">
