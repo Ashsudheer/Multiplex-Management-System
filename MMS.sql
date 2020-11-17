@@ -103,6 +103,7 @@ class_id INT NOT NULL,
 no_of_seats_left INT NOT NULL,
 no_of_seats_middle INT NOT NULL,
 no_of_seats_right INT NOT NULL,
+row_alph VARCHAR(7) NOT NULL,
 FOREIGN KEY (screen_id) REFERENCES Screen(screen_id),
 FOREIGN KEY (class_id) REFERENCES Class(class_id));
 
@@ -128,12 +129,19 @@ paid BOOL,
 cancelled BOOL,
 FOREIGN KEY (show_id) REFERENCES Shows(show_id));
 
-CREATE TABLE seatNums(
+INSERT INTO Ticket(show_id, no_seats, total_price, ticket_day, booking_day, paid, cancelled)
+VALUES (1, 4, 560, '2020-11-25', '2020-11-15', true, false),
+(19, 4, 720, '2020-11-25', '2020-11-16', true, false);
+
+CREATE TABLE SeatNums(
 ticket_no BIGINT NOT NULL,
 row_id INT NOT NULL,
-seat_no BIT NOT NULL,
+seat_no INT NOT NULL,
 FOREIGN KEY (ticket_no) REFERENCES Ticket(ticket_no),
-FOREIGN KEY (row_id) REFERENCES Shapes(row_id));
+FOREIGN KEY (row_id) REFERENCES Shapes(row_id),
+PRIMARY KEY (ticket_no, row_id, seat_no));
+
+
 
 CREATE TABLE Customer(
 username VARCHAR(127) NOT NULL PRIMARY KEY,
@@ -143,10 +151,11 @@ email VARCHAR(255),
 contact_no BIGINT NOT NULL UNIQUE);
 
 CREATE TABLE CustomerTicketRef(
-username VARCHAR(127),
+username VARCHAR(127) NOT NULL,
 ticket_no BIGINT NOT NULL UNIQUE,
 FOREIGN KEY (ticket_no) REFERENCES Ticket(ticket_no),
-FOREIGN KEY (username) REFERENCES Customer(username));
+FOREIGN KEY (username) REFERENCES Customer(username),
+PRIMARY KEY (username, ticket_no));
 
 CREATE TABLE EmpTicketRef(
 emp_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -158,8 +167,8 @@ CREATE TABLE BookedSeats(
 show_id INT NOT NULL,
 booking_date DATE NOT NULL,
 seat_no BIT NOT NULL,
-screenShape_id INT NOT NULL,
-PRIMARY KEY (show_id, booking_date, seat_no, screenShape_id));
+row_id INT NOT NULL,
+PRIMARY KEY (show_id, booking_date, seat_no, row_id));
 
 
 
@@ -237,15 +246,33 @@ VALUES ('Lounge', 400),
 ('Gold', 240),
 ('Silver', 200);
 
-INSERT INTO Shapes(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right)
-VALUES (1, 1, 2, 0, 2),
-(1, 2, 4, 0, 4),
-(1, 2, 4, 0, 4),
-(1, 3, 4, 0, 4),
-(1, 3, 4, 0, 4),
-(1, 3, 4, 0, 4),
-(1, 4, 4, 0, 4),
-(1, 4, 4, 0, 4);
+INSERT INTO Shapes(screen_id, class_id, no_of_seats_left, no_of_seats_middle, no_of_seats_right, row_alph)
+VALUES (1, 1, 2, 0, 2, 'A'),
+(1, 2, 4, 0, 4, 'B'),
+(1, 2, 4, 0, 4, 'C'),
+(1, 3, 4, 0, 4, 'D'),
+(1, 3, 4, 0, 4, 'E'),
+(1, 3, 4, 0, 4, 'F'),
+(1, 4, 4, 0, 4, 'G'),
+(1, 4, 4, 0, 4, 'H'),
+(2, 1, 1, 2, 1, 'A'),
+(2, 2, 4, 4, 4, 'B'),
+(2, 2, 4, 4, 4, 'C'),
+(2, 3, 4, 4, 4, 'D'),
+(2, 3, 4, 4, 4, 'E'),
+(2, 3, 4, 4, 4, 'F'),
+(2, 4, 4, 4, 4, 'G'),
+(2, 4, 4, 4, 4, 'H');
+
+INSERT INTO seatNums
+VALUES (1, 4, 1),
+(1, 4, 2),
+(1, 4, 3),
+(1, 4, 4),
+(2, 10, 5),
+(2, 10, 6),
+(2, 10, 7),
+(2, 10, 8);
 
 INSERT INTO Shows(screen_id, movie_id, start_time, show_day)
 VALUES (1, 1, 100000, 20201125),

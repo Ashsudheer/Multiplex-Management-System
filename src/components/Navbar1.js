@@ -24,7 +24,8 @@ class Navbar1 extends Component {
                 <a href="/" className="logo">MMS</a>
                 <nav>
                     <ul className="nav-links">
-                        <li><a href="/">Movies</a></li> 
+                        <li><a href="/UserHome">Movies</a></li> 
+                        <li><a href="/UserTickets">Tickets</a></li> 
                     </ul>
                 </nav>
                 <button onClick={this.signOut} >Sign Out</button>

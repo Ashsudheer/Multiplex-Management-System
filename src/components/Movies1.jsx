@@ -55,20 +55,20 @@ class Movies1 extends Component {
                 </div>
             :
                 <div class="container">
-                    <h2> NOW PLAYING </h2>
-                    <div class="d-flex align-items-center min-vh-100">
+                    <h2 class="text-center mb-5" > NOW PLAYING </h2>
+                    <div class="d-flex align-items-center ">
                     <div class="container">
                     <div class="card-deck">
                         {
                             this.state.movies.map(
                                 movie =>
                                 <div class="card mb-3 text-white" onClick={() => this.MovieSelect(movie.movieId)} >
-                                    <img class="card-img-top" src={this.blobToImage(movie.movieId)} alt="Card"/>
-                                    <div class="card-body">
+                                    <img class="card-img-top" src={this.blobToImage(movie.movieId)} alt="Card" style={{height:'25rem'}} />
+                                    <div class="card-body" style={{height:'20rem'}}>
                                         <h5 class="card-title text-center"> {movie.movieName}  </h5>
                                         <p class="card-text"> {movie.synopsis} </p>
-                                        <p class="card-text"><small class="text-muted"> {movie.genre} </small></p>
                                     </div>
+                                    <p class="card-text align-text-bottom"><small class="text-muted"> {movie.genre} </small></p>
                                 </div>
                             )
                         }

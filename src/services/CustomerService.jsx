@@ -16,6 +16,10 @@ class CustomerService {
         return axios.get(CUSTOMER_API_BASE_URL+'/'+username)
     }
 
+    getAllTickets(){
+        return axios.get(CUSTOMER_API_BASE_URL+'/tickets');
+    }
+
 }
 
 export default new CustomerService()
