@@ -10,11 +10,6 @@ function MovieItem({movie,option,select}){
     // var style={
     //     backgroundColor:'rgba(0,136,169,1)'
     // };
-    // const blobToImage = (Id) => {
-    //     let poster_url = "http://localhost:8081/api/v1/movies/"+Id.toString();
-    //     console.log('Poster:',poster_url);
-    //     return poster_url;
-    // }
 
     const expandItem = () => {
         if (option){

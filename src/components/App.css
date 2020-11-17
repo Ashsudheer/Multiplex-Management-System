@@ -111,6 +111,9 @@ button:hover, button:focus{
 .movie-details{
     width:80%;
 }
+.movie-details{
+    width:80%;
+}
 
 .movie-info h1,h2,p{
     background-color:#232324;
@@ -288,6 +291,7 @@ form #submit {
     font-size:5rem;
     margin-bottom:1.5rem;
 }
+
 
 .movie-card:hover img{
     opacity:0.5;

@@ -27,7 +27,7 @@ function Screen() {
                     </div>
                 </div>
                 {days.map((day,index)=>(
-                     <div className="row table" key={index}>
+                     <div className="row table">
                         <div className="col-sm-2 days">
                             <h1>{day}</h1>
                         </div>

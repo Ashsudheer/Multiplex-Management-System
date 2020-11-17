@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Router, Route, Link } from 'react-router-dom';
 import './Navbar.css';
 import './App.css';
 
@@ -9,13 +10,13 @@ class Navbar1 extends Component {
         this.state = {
         }
 
-        this.signOut = this.signOut.bind(this);
+        // this.signOut = this.signOut.bind(this);
 
     }
 
-    signOut = (e) => {
-        this.props.history.push('/');
-    }
+    // signOut = (e) => {
+    //     this.props.history.push('/');
+    // }
 
 
     render(){
@@ -27,7 +28,8 @@ class Navbar1 extends Component {
                         <li><a href="/">Movies</a></li> 
                     </ul>
                 </nav>
-                <button onClick={this.signOut} >Sign Out</button>
+                {/* <button onClick={this.signOut} >Sign Out</button> */}
+                <Link to="/"><button>Sign Out</button></Link>
             </header>
         );
     }

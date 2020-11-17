@@ -13,7 +13,7 @@ function Movies(){
     const [dir,setDir] = useState("");
     const [act,setAct] = useState("");
     const [date,setDate] = useState("");
-    const [dur,setDur] = useState(0);
+    const [dur,setDur] = useState("");
     const [des,setDes] = useState("");
     const [del,setDel] = useState(false);
     const [selects,setSelects] =useState([]);
@@ -29,37 +29,6 @@ function Movies(){
         display==="none"?setDisplay("block"):setDisplay("none");
         display==="none"?setHeight("100%"):setHeight("0");
     }
-
-    
-
-    // useEffect(()=>{
-    //     const loadData = () => {
-    //         MovieService.getAllMovies().then((res) => {
-    //           console.log('data:',res.data);
-    //           for (var i = 0;i<res.data.length;i++){
-    //               var info=res.data[i];
-    //               console.log(movies);
-    //               setMovies([
-    //                   ...movies,
-    //                   {
-    //                       id:info.movieId,
-    //                       name:info.movieName,
-    //                       directors:info.director,
-    //                       actors:info.actor,
-    //                       date:info.releaseDate,
-    //                       duration:info.duration,
-    //                       description:info.synopsis,
-    //                       language:info.language,
-    //                       subtitles:info.subtitle,
-    //                       poster:info.poster
-    //                   }
-    //               ]);
-    //           }
-    //           console.log(movies);
-    //       })
-    //   }
-    //   loadData();
-    // },[]);
 
     useEffect(() => {
         // const fetchData = () => {
@@ -108,7 +77,6 @@ function Movies(){
         })
         // fetchData();
     }, []);
-
 
     const deleteMovie = () => {
         if (del===false) setDel(true);
@@ -232,7 +200,7 @@ function Movies(){
                     </div>
                     <div>
                         <label htmlFor="Duration">Duration</label>
-                        <input type="text" id="dur" name="Duration" onChange={e=>setDur(e.target.value)}/><br/>
+                        <input type="text" id="dur" name="Duration" value={dur} onChange={e=>setDur(e.target.value)}/><br/>
                     </div>
                     <div>
                         <label htmlFor="Language">Language</label>

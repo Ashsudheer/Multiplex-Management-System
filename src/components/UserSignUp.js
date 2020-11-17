@@ -81,14 +81,14 @@ class UserSignUp extends Component {
                 {
                 this.state.created?
                 <div class="container">
-                <label htmlFor="Reroute"> Signed Up. Sign in to continue</label>
-                <div className="login-buttons">
-                        <button class="btn-success" onClick={this.cancel} > Sign In </button>
-                </div>
+                    <label htmlFor="Reroute"> Signed Up. Sign in to continue</label>
+                    <div className="login-buttons">
+                            <button class="btn-success" onClick={this.cancel} > Sign In </button>
+                    </div>
                 </div>
                 :
                 <div className="login-form">
-                    <h1 class="text-center"> User Login </h1>
+                    <h1 class="text-center"> User Sign Up </h1>
                     <div className="icon">
                         <i className="fas fa-user-circle"></i>
                     </div>
