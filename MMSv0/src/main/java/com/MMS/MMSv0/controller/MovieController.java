@@ -3,7 +3,7 @@ package com.MMS.MMSv0.controller;
 
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MMS.MMSv0.exception.ResourceNotFoundException;
-import com.MMS.MMSv0.model.Customer;
 import com.MMS.MMSv0.model.Movie;
+import com.MMS.MMSv0.model.Shows;
 import com.MMS.MMSv0.repository.MovieRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,25 +29,31 @@ import com.MMS.MMSv0.repository.MovieRepository;
 public class MovieController {
 
 	@Autowired
-	private MovieRepository MovieRepository;
+	private MovieRepository movieRepository;
 	
-	
-//	@PostMapping(path = "/movies", consumes = "application/x-www-form-urlencoded")
-	@PostMapping("/movies")
-	public Movie addMovie(@RequestBody Movie movie) {
-		return MovieRepository.save(movie);
-	}
 	//get all movies
 	@GetMapping("/movies")
 	public List<Movie> getAllMovies(){
-		return MovieRepository.findAll();
+		return movieRepository.findAll();
+	}
+	
+	@PostMapping("/movies")
+	public Movie addMovie(@RequestBody Movie movie) {
+		return movieRepository.save(movie);
+	}
+	
+	@GetMapping("/movies/name/{movieId}")
+	public String getMovieByShow(@PathVariable int movieId) {
+		Optional<Movie> list = movieRepository.findById(movieId);
+		Movie movie1 = list.get();
+		return movie1.getMovieName();
 	}
 	
 	//get image
 //	@GetMapping("/movies/{Id}")
 //	public ResponseEntity<Resource> downloadFile(@PathVariable int Id){
 //        // Load file as Resource
-//		Movie movie  = MovieRepository.findById(Id).orElseThrow(() -> new ResourceNotFoundException("Movie does not exist"));
+//		Movie movie  = movieRepository.findById(Id).orElseThrow(() -> new ResourceNotFoundException("Movie does not exist"));
 //
 //        return ResponseEntity.ok()
 //            .contentType(MediaType.parseMediaType("image/jpeg"))

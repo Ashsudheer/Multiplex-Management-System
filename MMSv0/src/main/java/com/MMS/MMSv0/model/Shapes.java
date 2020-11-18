@@ -2,21 +2,24 @@ package com.MMS.MMSv0.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ScreenShape")
-public class ScreenShape {
-	
+@Table(name = "Shapes")
+public class Shapes {
+
 	@Id
-	private int screenShapeId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int rowId;
 	
 	@Column(name = "screen_id")
 	private int screenId;
 	
 	@Column(name = "class_id")
-	private int cassId;
+	private int classId;
 	
 	@Column(name = "no_of_seats_left")
 	private int noLeft;
@@ -27,26 +30,30 @@ public class ScreenShape {
 	@Column(name = "no_of_seats_right")
 	private int noRight;
 
-	public ScreenShape() {
-		super();
+	@Column(name = "row_alph")
+	private String rowAlph;
+
+	public Shapes() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public ScreenShape(int screenShapeId, int screenId, int cassId, int noLeft, int noMiddle, int noRight) {
+	public Shapes(int rowId, int screenId, int classId, int noLeft, int noMiddle, int noRight, String rowAlph) {
 		super();
-		this.screenShapeId = screenShapeId;
+		this.rowId = rowId;
 		this.screenId = screenId;
-		this.cassId = cassId;
+		this.classId = classId;
 		this.noLeft = noLeft;
 		this.noMiddle = noMiddle;
 		this.noRight = noRight;
+		this.rowAlph = rowAlph;
 	}
 
-	public int getScreenShapeId() {
-		return screenShapeId;
+	public int getRowId() {
+		return rowId;
 	}
 
-	public void setScreenShapeId(int screenShapeId) {
-		this.screenShapeId = screenShapeId;
+	public void setRowId(int rowId) {
+		this.rowId = rowId;
 	}
 
 	public int getScreenId() {
@@ -57,12 +64,12 @@ public class ScreenShape {
 		this.screenId = screenId;
 	}
 
-	public int getCassId() {
-		return cassId;
+	public int getClassId() {
+		return classId;
 	}
 
-	public void setCassId(int cassId) {
-		this.cassId = cassId;
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
 
 	public int getNoLeft() {
@@ -88,6 +95,17 @@ public class ScreenShape {
 	public void setNoRight(int noRight) {
 		this.noRight = noRight;
 	}
+
+	public String getRowAlph() {
+		return rowAlph;
+	}
+
+	public void setRowAlph(String rowAlph) {
+		this.rowAlph = rowAlph;
+	}
+	
+	
+	
 	
 	
 }

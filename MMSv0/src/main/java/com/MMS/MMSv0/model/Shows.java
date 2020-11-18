@@ -1,5 +1,6 @@
 package com.MMS.MMSv0.model;
 
+import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.Column;
@@ -7,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -28,17 +28,31 @@ public class Shows {
 	
 	@Column(name = "start_time")
 	private Time startTime;
+	
+	@Column(name = "show_day")
+	private Date showDay;
 
 	public Shows() {
 		
 	}
 
-	public Shows(int showId, int screenId, int movieId, Time startTime) {
+	public Shows(int showId, int screenId, int movieId, Time startTime, Date showDay) {
 		super();
 		this.showId = showId;
 		this.screenId = screenId;
 		this.movieId = movieId;
 		this.startTime = startTime;
+		this.showDay = showDay;
+	}
+	
+	
+
+	public Date getShowDay() {
+		return showDay;
+	}
+
+	public void setShowDay(Date showDay) {
+		this.showDay = showDay;
 	}
 
 	public int getShowId() {
