@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './Navbar.css';
 import './App.css';
-import Shows from './Shows';
 import CustomerService from '../services/CustomerService';
+//import ShowService from '../services/ShowService';
+//import MovieService from '../services/MovieService';
+import ViewTicket from './ViewTicket';
 
 class Tickets extends Component {
     constructor(props) {
@@ -10,13 +12,16 @@ class Tickets extends Component {
         
         this.state = {
             tickets: [],
-            isShows: false,
-            selectedMovie: ''
+            isTicket: false,
+            selectedTicket: '',
+            movieId: '',
+            movieName: ''
         }
 
         
-        this.back = this.back.bind(this);
-        this.MovieSelect = this.MovieSelect.bind(this)
+        this.outputstates = this.outputstates.bind(this);
+        this.MovieSelect = this.MovieSelect.bind(this);
+        this.getMovieName = this.getMovieName.bind(this);
     }
 
     componentDidMount(){
@@ -26,9 +31,9 @@ class Tickets extends Component {
     }
 
 
-    back = (e) => {
-        this.setState({isShows: !this.state.isShows});
-        this.forceUpdate();
+    outputstates = (e) => {
+        console.log(this.state.movieId);
+        console.log(this.state.movieName);
     }
 
     MovieSelect = (Id) => {
@@ -37,24 +42,56 @@ class Tickets extends Component {
         this.forceUpdate();
     }
 
+    viewTicket = (Id) => {
+        this.setState({isTicket: !this.state.isTicket,
+            selectedTicket: Id},
+            function () {
+                console.log(this.state.isTicket, this.state.selectedTicket, Id);
+              });
+        //console.log(this.state.isTicket, this.state.selectedTicket, Id);
+        this.forceUpdate();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.movieId === nextState.movieId;
+    }
+
+    getMovieName = (showId) => {
+        /* ShowService.getMovieByShow(showId).then((res) => {
+            this.setState({ movieId: res.data},
+                function () {
+                    console.log(this.state.movieName);
+                  });
+        });
+        console.log(this.state.movieId); */
+        //let movieName = MovieService.
+        if(showId === 1)
+            return "Joker";
+        else
+            return "Grave of the fireflies";
+        //return this.state.movieId;
+    }
+
     render(){
         return (
             <div class="container">
-            {this.state.isShows?
+            {this.state.isTicket?
                 <div class="container">
                     <button class="btn-danger" onClick={this.back} > Back </button>
-                    <Shows movieId={this.state.selectedMovie}/> 
+                    <ViewTicket ticketNo={this.state.selectedTicket}/> 
                 </div>
             :
                 <div class="container">
-                    <h2 class="text-center" > TICKETS </h2>
+                    <h2 class="text-center mb-3" > TICKETS </h2>
                     <table className = "table table-striped table-bordered text-white">
                         <thead>
                             <tr>
                                 <th> Ticket Number </th>
+                                <th> Movie </th>
                                 <th> No of Seats </th>
                                 <th> Price </th>
                                 <th> Date </th>
+                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,10 +99,15 @@ class Tickets extends Component {
                                 this.state.tickets.map(
                                     ticket =>
                                     <tr key = {ticket.id}>
-                                        <td> {ticket.ticketNo} </td>   
+                                        <td> {ticket.ticketNo} </td>  
+                                        <td> {this.getMovieName(ticket.showId)} </td> 
                                         <td> {ticket.noSeats} </td>
                                         <td> {ticket.totalPrice} </td>
                                         <td> {ticket.ticketDay} </td>
+                                        <td> 
+                                            <button style={{marginLeft: "10px"}} onClick={ () => this.cancelTicket(ticket.ticketNo)} className="btn btn-danger"> Cancel </button>
+                                            <button style={{marginLeft: "10px"}} onClick={ () => this.viewTicket(ticket.ticketNo)} className="btn btn-info"> View </button> 
+                                        </td>
                                     </tr>
                                 )
                             }

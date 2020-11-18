@@ -3,7 +3,7 @@ import ShowService from '../services/ShowService';
 import './App.css';
 import Payment from './Payment';
 
-class SelectSeats extends Component {
+class SelectSeats1 extends Component {
     constructor(props) {
         super(props)
         
@@ -27,7 +27,8 @@ class SelectSeats extends Component {
         })
     }
 
-    selectSeat = (rowId, seatNum) => {
+    selectSeat = (event) => {
+        console.log(event);
         /* this.setState({
             selectedRows: this.state.selectedRows.concat(rowId),
             selectedSeats: this.state.selectedSeats.concat(seatNum)
@@ -47,26 +48,28 @@ class SelectSeats extends Component {
                 <div class="container">
                     <h2> SELECT SEATS </h2>
                     <div class="container">
-                    <div class="btn-group-toggle" data-toggle="buttons">
+                    <form onsubmit={this.selectSeat()}>
                         {
                             this.state.rows.map(
                                 (row, j) =>
                                 <div class="row">
-                                    <label class="text-white"> {this.state.alph[j]} </label>
+                                    <div class="col justify-content-end">
+                                    <p class="text-white" > {this.state.alph[j]} </p>
+                                    </div>
                                     <div class="col justify-content-end">
                                     {
                                         [...Array(row.noLeft)].map((x, i) =>
                                             <label class="btn btn-secondary">
-                                                <input type="checkbox" onChange={this.selectSeat(row.rowId, i+1)} /> {i+1}
+                                                <input type="checkbox" name="langs[]" id="langs_perl" value="Perl" /> {i+1}
                                             </label>
                                         )
-                                    }  
-                                    </div> 
+                                    }   
+                                    </div>
                                     <div class="col justify-content-center">
                                     {
                                         [...Array(row.noMiddle)].map((x, i) =>
                                             <label class="btn btn-secondary">
-                                                <input type="checkbox" onChange={this.selectSeat(row.rowId, row.noLeft+i+1)} /> {row.noLeft+i+1}
+                                                <input type="checkbox" name="langs[]" id="langs_perl" value="Perl" /> {row.noLeft+i+1}
                                             </label>
                                         )
                                     }
@@ -74,19 +77,22 @@ class SelectSeats extends Component {
                                     <div class="col justify-content-start">
                                     {
                                         [...Array(row.noRight)].map((x, i) =>
-                                            <label class="btn btn-secondary">
-                                                <input type="checkbox" onChange={this.selectSeat(row.rowId, row.noLeft+row.noMiddle+i+1)} /> 
-                                                {row.noLeft+row.noMiddle+i+1}
-                                            </label>
+                                        <label class="btn btn-secondary">
+                                        <input type="checkbox" name="langs[]" id="langs_perl" value="Perl" /> {row.noLeft+row.noMiddle+i+1}
+                                    </label>
                                         )
                                     }
                                     </div>
                                 </div>
                             )
                         }
+                    <div>
+                    <label class="btn btn-success">
+                        <input class="bg-transparent" type="submit" name="submit" value="Book Tickets"/>
+                    </label>
                     </div>
+                    </form>
                     </div>
-                    <button class="btn-success" onClick={this.cancel} > Book Tickets </button>
                 </div>
             }
             </div>
@@ -94,4 +100,4 @@ class SelectSeats extends Component {
     }
 }
 
-export default SelectSeats;
+export default SelectSeats1;

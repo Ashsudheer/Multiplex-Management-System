@@ -55,7 +55,7 @@ class Movies1 extends Component {
                 </div>
             :
                 <div class="container">
-                    <h2 class="text-center mb-5" > NOW PLAYING </h2>
+                    <h2 class="text-center mb-3" > NOW PLAYING </h2>
                     <div class="d-flex align-items-center ">
                     <div class="container">
                     <div class="card-deck">
