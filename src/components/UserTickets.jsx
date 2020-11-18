@@ -1,24 +1,26 @@
 import React, {Component} from 'react';
 import './App.css';
+import Navbar1 from './Navbar1';
+import Tickets from './Tickets';
 
-class Booking extends Component {
+class UserTickets extends Component {
     constructor(props) {
         super(props)
         
         this.state = {
-            movieId: this.props.movieId,
-            showId: this.props.showId
-        }
+            
+        };
 
     }
 
     render(){
         return (
             <div>
-                <h2> Booking {this.state.movieId} {this.state.showId}</h2>
+                <Navbar1 />
+                <Tickets />
             </div>
         );
     }
 }
 
-export default Booking;
+export default UserTickets;

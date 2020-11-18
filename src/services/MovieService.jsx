@@ -15,6 +15,9 @@ class MovieService {
         });
     }
 
+    getMovieNameByMovieId(movieId){
+        return axios.get(MOVIES_API_BASE_URL+"/name/"+movieId);
+    }
 
 }
 

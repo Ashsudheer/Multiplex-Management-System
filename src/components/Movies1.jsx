@@ -43,7 +43,7 @@ class Movies1 extends Component {
     }
 
     MovieSelect = (Id) => {
-        //console.log(Id);
+        // console.log(Id);
         this.setState({isShows: !this.state.isShows,
         selectedMovie: Id});
         this.forceUpdate();
@@ -82,13 +82,13 @@ class Movies1 extends Component {
                     </div> */}
                     {/* <div className="align-items-center"> */}
                         <div className="container-fluid">
-                            <div className="row" style={{margin:'2rem'}}>
+                            <div className="row" style={{margin:'0.1rem'}}>
                                 {
                                     this.state.movies.map(
                                         (movie,index) =>{
                                             return(
                                             <div className=" col-lg-2">
-                                                {!this.loading && <MovieCard movie={movie} onClick={() => this.MovieSelect(movie.movieId)}/>}
+                                                {!this.loading && <MovieCard movie={movie} callback={this.MovieSelect}/>}
                                             </div>
                                             );
                                         }

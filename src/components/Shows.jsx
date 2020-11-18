@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Booking from './Booking';
 import ShowService from '../services/ShowService'
+import SelectSeats from './SelectSeats';
 
 class Shows extends Component {
     constructor(props) {
@@ -12,7 +12,9 @@ class Shows extends Component {
             times: [],
             movieId: this.props.movieId,
             isBooking: false,
-            selectedShow: ''
+            selectedShow: '',
+            selectedDay: '',
+            screenId: ''
         }
 
         this.formatdate = this.formatdate.bind(this);
@@ -36,7 +38,8 @@ class Shows extends Component {
 
     toggleDay = (date) => {
         ShowService.getDatesByMovieAndDay(this.state.movieId, date).then((res) => {
-            this.setState({ times: res.data});
+            this.setState({ times: res.data,
+            selectedDay: date});
         })
         this.forceUpdate();
     }
@@ -73,10 +76,12 @@ class Shows extends Component {
     }
 
     showSelect = (time) => {
-        //console.log(Id);
-        this.setState({isBooking: !this.state.isBooking,
-        selectedShow: time});
-        this.forceUpdate();
+        ShowService.getScreenByMovieAndDay(this.state.movieId, this.state.selectedDay).then((res) => {
+            this.setState({isBooking: !this.state.isBooking,
+                selectedShow: time,
+                screenId: res.data});
+            this.forceUpdate();
+        })
     }
 
     render(){
@@ -84,8 +89,7 @@ class Shows extends Component {
             <div class="container">
             {this.state.isBooking?
                 <div class="container">
-                    <button class="btn-danger" onClick={this.back} > Back </button>
-                    <Booking movieId={this.state.movieId} showId={this.state.selectedShow}/> 
+                    <SelectSeats movieId={this.state.movieId} showId={this.state.selectedShow} screenId={this.state.screenId} /> 
                 </div>
             :
                 <div class="container">
