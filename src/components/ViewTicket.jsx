@@ -66,61 +66,85 @@ class ViewTicket extends Component {
                     <Shows movieId={this.state.selectedMovie}/> 
                 </div>
             :
-                <div class="container text-white">
-                    <h2 class="text-center mb-3" > TICKET - {this.state.ticket.ticketNo} </h2>
+                <div class="container border text-white" style={{marginTop:'5rem',padding:'2rem'}}>
+                    <div className="col-12">
+                        <h2 class="text-center mb-3" > TICKET - {this.state.ticket.ticketNo} </h2>
+                    </div>
+
                     <div class="container">
                         <div className="col">
-                            <div className="row" style={{height:'10rem'}}>
-                                <div className="col">
-                                    <div className="row" style={{height:'5rem'}}>
+                            <div className="row" style={{height:'3rem'}}>
+                                <div className="col border-right">
+                                    {/* <div className="row" style={{height:'2rem'}}>
                                         Ticket No: {this.state.ticket.ticketNo}
-                                    </div>
-                                    <div className="row" style={{height:'5rem'}}>
+                                    </div> */}
+                                    {/* <div className="row"> */}
                                         Movie: {this.state.movieName}
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                                 <div className="col">
-                                    Screen {this.state.screen.screenNo}
+                                    Screen: {this.state.screen.screenNo}
                                 </div>
                             </div>
-                            <div className="row" style={{height:'5rem'}}>
-                                <div className="col">
+                            <div className="row" style={{height:'3rem'}}>
+                                <div className="col border-right">
                                     Time: {this.state.show.startTime}
                                 </div>
                                 <div className="col">
                                     Day: {this.state.show.showDay}
                                 </div>
                             </div>
-                            <div className="row" style={{height:'5rem'}}>
-                                <div className="col">
+                            <div className="row" style={{height:'3rem'}}>
+                                <div className="col border-right">
                                     No of Seats: {this.state.ticket.noSeats}
                                 </div>
                                 <div className="col">
                                     Price: {this.state.ticket.totalPrice}
                                 </div>
                             </div>
-                            <div className="row" style={{height:'10rem'}}>
-                                Seats:
+                            <div className="row" style={{height:'3rem'}}>
+                                <div className="col border-right">
+                                    Seats: 
+                                </div>
+                                <div className="col">
+                                    Admits: {this.state.ticket.noSeats}
+                                </div>
                             </div>
                         </div>
-                        <div className="col">
-                            <div className="row" style={{height:'5rem'}}>
+                        {/* <div className="col">
+                            <div className="row" style={{height:'3rem'}}>
                                 Ticket No: {this.state.ticket.ticketNo}
                             </div>
-                            <div className="row" style={{height:'5rem'}}>
+                            <div className="row" style={{height:'3rem'}}>
                                 Screen: {this.state.screen.screenNo}
                             </div>
-                            <div className="row" style={{height:'5rem'}}>
+                            <div className="row" style={{height:'3rem'}}>
                                 Time: {this.state.show.startTime}
                             </div>
-                            <div className="row" style={{height:'5rem'}}>
+                            <div className="row" style={{height:'3rem'}}>
                                 Day: {this.state.show.showDay}
                             </div>
-                            <div className="row" style={{height:'10rem'}}>
+                            <div className="row" style={{height:'3rem'}}>
                                 Admits {this.state.ticket.noSeats}
                             </div>
+                        </div> */}
+                    </div>
+                    {/* <div className="col-lg-6" style={{margin:'0'}}>
+                        <div className="row">
+                            Ticket No: {this.state.ticket.ticketNo}
+                        </div>
+                        <div className="row">
+                            Movie: {this.state.movieName}
                         </div>
                     </div>
+                    <div className="col-lg-6">
+                        <div className="row">
+                            Screen {this.state.screen.screenNo}
+                        </div>
+                        <div className="row">
+                            Movie: {this.state.movieName}
+                        </div>
+                    </div> */}
                 </div>
             }
             </div>

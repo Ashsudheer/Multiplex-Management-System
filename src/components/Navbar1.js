@@ -26,6 +26,7 @@ class Navbar1 extends Component {
                 <nav>
                     <ul className="nav-links">
                         <li><a href="/">Movies</a></li> 
+                        <li><a href="/UserTickets">Tickets</a></li> 
                     </ul>
                 </nav>
                 {/* <button onClick={this.signOut} >Sign Out</button> */}
